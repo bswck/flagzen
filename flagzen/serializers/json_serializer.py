@@ -1,6 +1,6 @@
 import json
 
-from inflager.serializer import Serializer
+from flagzen.serializer import Serializer
 
 
 class JSONSerializer(Serializer):

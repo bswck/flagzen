@@ -1,6 +1,6 @@
 import pytest
 
-from inflager import Inflager
+from flagzen import Inflager
 
 
 @pytest.fixture

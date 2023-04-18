@@ -1,8 +1,8 @@
 import pytest
 
-from inflager.serializers.blob_serializer import BlobSerializer
-from inflager.serializers.json_serializer import JSONSerializer
-from inflager.serializers.orjson_serializer import ORJSONSerializer
+from flagzen.serializers.blob_serializer import BlobSerializer
+from flagzen.serializers.json_serializer import JSONSerializer
+from flagzen.serializers.orjson_serializer import ORJSONSerializer
 
 
 @pytest.fixture(scope='module', params=[BlobSerializer, JSONSerializer, ORJSONSerializer])

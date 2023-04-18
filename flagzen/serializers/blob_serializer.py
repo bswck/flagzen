@@ -6,7 +6,7 @@ except ImportError:
         'Install it with `pip install construct`.'
     )
 
-from inflager.serializer import Serializer
+from flagzen.serializer import Serializer
 
 
 BLOB = cs.Struct(

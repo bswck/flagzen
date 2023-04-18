@@ -1,4 +1,4 @@
-# PROJECT_NAME
+# flagzen
 
 ## Setup
 ## License

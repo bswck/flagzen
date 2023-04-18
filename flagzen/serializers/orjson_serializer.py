@@ -6,7 +6,7 @@ except ImportError:
         'Install it with `pip install orjson`.'
     )
 
-from inflager.serializer import Serializer
+from flagzen.serializer import Serializer
 
 
 class ORJSONSerializer(Serializer):

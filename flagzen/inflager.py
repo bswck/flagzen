@@ -2,7 +2,7 @@ import bisect
 import functools
 from collections.abc import Iterator, Generator
 
-from inflager.serializer import Serializer
+from flagzen.serializer import Serializer
 
 
 class State(int):

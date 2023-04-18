@@ -5,12 +5,12 @@ class DefaultSerializer:
         owner: 'type[Serializer] | None' = None
     ) -> 'type[Serializer]':
         try:
-            from inflager.serializers.blob_serializer import BlobSerializer as SerializerClass
+            from flagzen.serializers.blob_serializer import BlobSerializer as SerializerClass
         except ImportError:
             try:
-                from inflager.serializers.orjson_serializer import ORJSONSerializer as SerializerClass
+                from flagzen.serializers.orjson_serializer import ORJSONSerializer as SerializerClass
             except ImportError:
-                from inflager.serializers.json_serializer import JSONSerializer as SerializerClass
+                from flagzen.serializers.json_serializer import JSONSerializer as SerializerClass
         return SerializerClass
 
 
