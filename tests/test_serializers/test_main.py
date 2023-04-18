@@ -10,12 +10,12 @@ def serializer(request):
     yield request.param()
 
 
-def test_dump(inflager, serializer):
-    inflager.serializer = serializer
-    assert serializer.load(serializer.dump(inflager.flags)) == inflager.flags
+def test_dump(registry, serializer):
+    registry.serializer = serializer
+    assert serializer.load(serializer.dump(registry.flags)) == registry.flags
 
 
-def test_serialize(inflager, serializer):
-    inflager.serializer = serializer
-    assert inflager.load(inflager.serialize(), serializer).flags == inflager.flags
+def test_serialize(registry, serializer):
+    registry.serializer = serializer
+    assert registry.load(registry.serialize(), serializer).flags == registry.flags
 
