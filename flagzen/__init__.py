@@ -1,3 +1,3 @@
-from .inflager import State
-from .inflager import Inflager
+from .registry import State
+from .registry import Registry
 from .serializer import Serializer

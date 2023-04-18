@@ -10,26 +10,26 @@ class State(int):
         self,
         _value: int | str | bytes | bytearray = 0, /,
         _base: int | None = None,
-        inflager: 'Inflager | None' = None,
+        registry: 'Inflager | None' = None,
         **_base_kwd
     ) -> None:
-        self._inflager = inflager
+        self._registry = registry
 
     def __new__(
         cls,
         value: int | str | bytes | bytearray = 0, /,
         base: int | None = None,
-        inflager: 'Inflager | None' = None
+        registry: 'Inflager | None' = None
     ):
         if base is None:
             return super().__new__(cls, value)
         return super().__new__(cls, value, base)
 
     def __iter__(self) -> Iterator[tuple[str, int]]:
-        if self._inflager is None:
+        if self._registry is None:
             yield from ()
         else:
-            yield from self._inflager.get(self)
+            yield from self._registry.get(self)
 
 
 STATE_OVERLOAD_METHODS = (
@@ -82,7 +82,7 @@ STATE_OVERLOAD_METHODS = (
 
 def wrapped_method(method):
     def wrapper(self, other):
-        return type(self)(method(self, other), inflager=self._inflager)
+        return type(self)(method(self, other), registry=self._registry)
     return wrapper
 
 
@@ -90,7 +90,7 @@ for method_name in STATE_OVERLOAD_METHODS:
     setattr(State, method_name, wrapped_method(getattr(int, method_name)))
 
 
-class Inflager:
+class Registry:
     serializer: type[Serializer] = Serializer.default()
     state_class: type[int] = State
 
@@ -98,7 +98,7 @@ class Inflager:
         self.flags = flags or {}
 
     def state(self, value: int = 0) -> State:
-        return self.state_class(value, inflager=self)
+        return self.state_class(value, registry=self)
 
     def get(self, value: int = 0) -> Generator[tuple[str, int], None, None]:
         # TODO: any faster, please?
@@ -128,7 +128,7 @@ class Inflager:
         return self.serializer.dump(self.flags)
 
     @classmethod
-    def load(cls, dump: bytes, serializer: Serializer | None = None) -> 'Inflager':
+    def load(cls, dump: bytes, serializer: Serializer | None = None) -> 'Registry':
         if serializer is None:
             serializer = cls.serializer
         return cls(flags=serializer.load(dump))

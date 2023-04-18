@@ -1,9 +1,9 @@
 import pytest
 
-from flagzen import Inflager
+from flagzen import Registry
 
 
 @pytest.fixture
-def inflager():
-    return Inflager({'foo': 1, 'bar': 2})
+def registry():
+    return Registry({'foo': 1, 'bar': 2})
 
